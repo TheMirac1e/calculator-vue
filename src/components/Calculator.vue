@@ -36,12 +36,14 @@ export default {
 
     appendOperand(operand) {
       if (this.currentValue === '' && this.currentValue === '0') return;
-      this.prevValue = this.currentValue;
+
+      this.prevValue = this.currentValue + operand;
+      this.currentOperator = operand.toString();
       this.currentValue = '0';
 
       if(this.lastIsOperand()) {
         const str = this.prevValue.toString()
-        const cur = str.slice(0, -1) + operand
+        const cur = str.slice(0, -1) + operand.toString();
 
         this.prevValue = cur;
       } else {
@@ -51,6 +53,7 @@ export default {
 
     lastIsOperand() {
       const operand = this.prevValue.slice(-1);
+      console.log (operand);
       return operand === '+' || operand === '*' || operand === '/' || operand === '-';
     },
 
@@ -78,7 +81,6 @@ export default {
       }
 
       this.currentValue = computation;
-      this.currentOperator = null;
       this.prevValue = '';
     }
   },
@@ -90,11 +92,11 @@ export default {
 </script>
 
 <template>
-  <div class="flex flex-col items-end bg-gray-900 p-2 mb-1 br-2 rounded-lg">
-    <div class="text-sm mb-1">
+  <div class="flex flex-col items-end bg-gray-900 p-2 mb-1 br-2 rounded-lg h-24 justify-end">
+    <div class="text-lg mb-1">
       {{ prevValue }}
     </div>
-    <div class="text-2xl">
+    <div class="text-3xl">
       {{ currentValue }}
     </div>
   </div>
