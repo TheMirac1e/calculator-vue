@@ -4,6 +4,6 @@ import { ghPages } from "vite-plugin-gh-pages";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "https://github.com/TheMirac1e/calculator-vue",
+  base: "calculator-vue",
   plugins: [vue(), ghPages()],
 })
