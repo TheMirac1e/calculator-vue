@@ -6,14 +6,14 @@ export default {
     return {
       currentValue: '0',
       prevValue: '0',
-      currentOperator: '',
+      currentOperator: null,
     }
   },
   methods: {
     clearAll() {
       this.currentValue = '0';
       this.prevValue = '0';
-      this.currentOperator = '';
+      this.currentOperator = null;
     },
 
     clearOneChar() {
@@ -37,17 +37,15 @@ export default {
     appendOperand(operand) {
       if (this.currentValue === '' && this.currentValue === '0') return;
 
-      this.prevValue = this.currentValue + operand;
-      this.currentOperator = operand.toString();
-      this.currentValue = '0';
-
       if(this.lastIsOperand()) {
         const str = this.prevValue.toString()
         const cur = str.slice(0, -1) + operand.toString();
 
         this.prevValue = cur;
       } else {
-        this.prevValue += operand.toString();
+        this.prevValue = this.currentValue + operand;
+        this.currentOperator = operand.toString();
+        this.currentValue = '0';
       }
     },
 
@@ -80,6 +78,7 @@ export default {
       }
 
       this.currentValue = computation;
+      this.operand = null;
       this.prevValue = '';
     }
   },
