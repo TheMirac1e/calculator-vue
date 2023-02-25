@@ -53,7 +53,6 @@ export default {
 
     lastIsOperand() {
       const operand = this.prevValue.slice(-1);
-      console.log (operand);
       return operand === '+' || operand === '*' || operand === '/' || operand === '-';
     },
 
